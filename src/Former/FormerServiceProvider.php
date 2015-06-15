@@ -39,7 +39,7 @@ class FormerServiceProvider extends ServiceProvider
 	 */
 	public function provides()
 	{
-		return array('former');
+		return array('former', 'Former\Former');
 	}
 
 	////////////////////////////////////////////////////////////////////
@@ -186,8 +186,7 @@ class FormerServiceProvider extends ServiceProvider
 		$this->publishes([$configPath => $app['path.config'] . '/former.php']);
 		
 		$framework = $app['config']->get('former.framework');
-		$this->mergeConfigFrom(__DIR__ . '/../config/'.$framework.'.php', 'former.'.$framework);
-
+		
 		$app->bind('former.framework', function ($app) {
 			return $app['former']->getFrameworkInstance($app['config']->get('former.framework'));
 		});
@@ -203,6 +202,7 @@ class FormerServiceProvider extends ServiceProvider
 		$app->singleton('former', function ($app) {
 			return new Former($app, $app->make('former.dispatcher'));
 		});
+		$app->alias('former', 'Former\Former');
 
 		Helpers::setApp($app);
 
