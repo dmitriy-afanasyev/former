@@ -577,4 +577,17 @@ abstract class Checkable extends Field
 
 		return $groupIndex;
 	}
+
+	/**
+	 * Set items
+	 *
+	 * @param array $items
+	 * @return $this
+	 */
+	public function setItems($items = array())
+	{
+		$this->items = $items;
+
+		return $this;
+	}
 }
