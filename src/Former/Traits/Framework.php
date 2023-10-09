@@ -2,6 +2,7 @@
 namespace Former\Traits;
 
 use HtmlObject\Element;
+use Illuminate\Support\Arr;
 
 /**
  * Base helpers and common methods to all frameworks
@@ -200,9 +201,9 @@ abstract class Framework
 		}
 
 		// icon settings can be overridden for a specific icon
-		$tag    = array_get($iconSettings, 'tag', $this->iconTag);
-		$set    = array_get($iconSettings, 'set', $this->iconSet);
-		$prefix = array_get($iconSettings, 'prefix', $this->iconPrefix);
+		$tag    = Arr::get($iconSettings, 'tag', $this->iconTag);
+		$set    = Arr::get($iconSettings, 'set', $this->iconSet);
+		$prefix = Arr::get($iconSettings, 'prefix', $this->iconPrefix);
 
 		return Element::create($tag, null, $attributes)->addClass("$set $prefix-$iconType");
 	}
